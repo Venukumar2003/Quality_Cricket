@@ -1,0 +1,120 @@
+/* Background */
+.auth-page {
+  height: 100vh;
+  background: url("https://images.unsplash.com/photo-1508098682722-e99c43a406b2")
+    no-repeat center center/cover;
+}
+
+.overlay {
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card */
+.auth-card {
+  width: 360px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.auth-card h2 {
+  margin-bottom: 15px;
+}
+
+/* Inputs */
+.auth-card input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  
+}
+
+/* Buttons */
+.main-btn {
+  width: 100%;
+  padding: 10px;
+  background: #4b5bdc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.secondary-btn {
+  width: 100%;
+  padding: 10px;
+  background: #ddd;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.secondary-btn:active {
+    background: #4b5bdc;
+}
+
+
+/* OTP boxes */
+.otp-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+}
+
+.otp-container input {
+  width: 35px;
+  height: 35px;
+  text-align: center;
+
+}
+
+/* small text */
+.small-text {
+  font-size: 12px;
+  color: gray;
+}
+.small-text-p{
+     font-size: 12px;
+  color: blue;
+  cursor: pointer;
+
+}
+
+
+.login-email{
+    display: flex;
+    width: 50%;
+    padding : 10px;
+    margin-right: 10px;
+    justify-content: center;
+}
+
+.login-phone{
+    display: flex;
+    width: 50%;
+    padding : 10px;
+    
+    justify-content: center;
+
+}
+
+.password{
+    color: rgb(56, 54, 54);
+    display: flex;
+    justify-self: start;
+    text-align: left
+
+}
+
+.password-list{
+
+    text-align: start;
+}
