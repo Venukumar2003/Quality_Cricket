@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import "./Auth.css";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,34 @@ import { useNavigate } from "react-router-dom";
 const ResetPassword = () => {
 
     const navigate = useNavigate();
+
+    const [password,setPassword] = useState("")
+    const [confirmPassword,setConfirmPassword] = useState("")
+
+    const handleSave = ()=>{
+      if(!password || !confirmPassword){
+        alert("Please enter all fields")
+        return;
+      }
+      if(password !== confirmPassword){
+        alert ("Passwords do not match")
+        return;
+      }
+
+      if(password.length < 6){
+        alert("Password must be 6 characters")
+        return;
+      }
+      console.log("Valid Password")
+
+      setPassword("")
+      setConfirmPassword("")
+
+      navigate("/login")
+
+
+    };
+
   return (
     <div className="auth-page">
         <Navbar />
@@ -20,10 +48,18 @@ const ResetPassword = () => {
             <li> have atleast one speial Character (!,%,@,#,&,* etc.)</li>
           </ul>
 
-          <input placeholder="New Password" />
-          <input placeholder="Confirm Password" />
+          <input type = "password"
+          placeholder="New Password" 
+          value={password}
+          onChange={(e)=> setPassword(e.target.value)}/>
+          
+          <input type="password"
+           placeholder="Confirm Password" 
+           value={confirmPassword}
+          onChange={(e)=> setConfirmPassword(e.target.value)}
+          />
 
-          <button className="main-btn" onClick={()=>navigate("/login")}>Save</button>
+          <button className="main-btn" onClick={handleSave}>Save</button>
 
         </div>
       </div>

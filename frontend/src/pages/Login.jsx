@@ -88,6 +88,15 @@ const  navigate = useNavigate();
 const handleLogin = ()=>{
     console.log(email,password);
 
+    if(!email || !password){
+      alert("please fill the fields")
+      return;
+    }
+    if(password.length < 6){
+      alert("password must be 6 characters")
+      return;
+    }
+
     setEmail("");
     setpassword("");
     setPhone("");
@@ -111,18 +120,24 @@ const handleLogin = ()=>{
 
           {!isPhone ? (
             <>
-              <input placeholder="Email" 
+              <input type="email"
+              placeholder="Email" 
               value = {email}
               onChange={(e)=>setEmail(e.target.value)} />
-              <input placeholder="Password" 
+
+              <input type="password"
+              placeholder="Password" 
               value={password}
               onChange={(e)=>setpassword(e.target.value)}/>
+
              <p className="small-text-p" onClick={()=> navigate("/forgot-password")}>Forgot Password?</p> 
+
               <button className="main-btn" type="submit" onClick={handleLogin} >Login</button>
             </>
           ) : (
             <>
-              <input placeholder="Phone Number" 
+              <input type="number"
+               placeholder="Phone Number" 
               value={phone} 
               onChange={(e)=>setPhone(e.target.value)}/>
               <button className="main-btn" onClick={()=>navigate("/verify-mobile")}>Send OTP</button>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Auth.css";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,11 @@ import { useNavigate } from "react-router-dom";
 const ForgotPassword = () => {
 
     const navigate = useNavigate();
+
+    const [email,setEmail]= useState("")
+
+
+
   return (
     <div className="auth-page">
         <Navbar />
@@ -18,7 +23,10 @@ const ForgotPassword = () => {
             Enter the email address associated with your account
           </p>
 
-          <input placeholder="Email" />
+          <input type="email" 
+          value={email}  
+          placeholder="Email"
+          onChange={(e)=>setEmail(e.target.value)} />
 
           <button className="main-btn" onClick={()=>navigate("/verify-otp")}>Continue</button>
 
