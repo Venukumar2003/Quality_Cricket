@@ -3,6 +3,7 @@ import "./Auth.css";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 
+import loginBg from "../assets/login.svg";
 const ForgotPassword = () => {
 
     const navigate = useNavigate();
@@ -12,7 +13,10 @@ const ForgotPassword = () => {
 
 
   return (
-    <div className="auth-page">
+    <div className="auth-page" style={{
+        backgroundImage: `url(${loginBg})`,
+      }} >
+      
         <Navbar />
       <div className="overlay">
         <div className="auth-card">

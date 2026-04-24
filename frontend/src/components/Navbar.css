@@ -7,13 +7,15 @@
 }
 
 .logo {
-  height: 40px;
+  height: 60px;
+  width: 80px;
 }
 
-.nav-links span {
+.nav-links a {
   margin: 0 12px;
   font-size: 14px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .nav-links .active {
@@ -27,4 +29,14 @@
   border: none;
   padding: 6px 16px;
   border-radius: 20px;
+  cursor: pointer;
 }
+
+
+/* .navbar {
+  background: transparent !important;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+} */

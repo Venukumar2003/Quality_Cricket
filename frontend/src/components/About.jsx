@@ -18,7 +18,10 @@
 
 
 import React from "react";
-import "../styles/Home.css";
+// import "../styles/Home.css";
+import "./About.css"
+
+import aboutImg from "../assets/about.svg"
 
 const About = () => {
   return (
@@ -27,7 +30,7 @@ const About = () => {
       {/* LEFT IMAGE */}
       <div className="about-left">
         <img
-          src="/assets/about.png"
+          src={aboutImg}
           alt="about"
         />
       </div>

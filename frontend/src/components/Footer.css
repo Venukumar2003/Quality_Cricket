@@ -1,0 +1,80 @@
+/* FULL BACKGROUND */
+.footer {
+  background: #3f51b5;
+  color: white;
+  padding: 50px 0;
+}
+
+/* 🔥 CONTAINER (THIS FIXES YOUR PROBLEM) */
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 0 20px;
+}
+
+/* COLUMNS */
+.footer-col {
+  flex: 1;
+}
+
+.footer-col h3,
+.footer-col h4 {
+  margin-bottom: 15px;
+}
+
+/* LIST */
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 8px;
+  cursor: pointer;
+  text-align: start;
+  margin-left: 100px;
+}
+
+
+
+.footer-col p{
+    margin: 20px;
+    text-align: start;
+}
+
+/* MAP IMAGE */
+.map {
+  margin-top: 30px;
+  width: 250px;
+  border-radius: 6px;
+}
+
+/* SUBSCRIBE */
+.subscribe {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.subscribe-box {
+  margin-top: 10px;
+}
+
+.subscribe-box input {
+  padding: 10px;
+  width: 250px;
+  border-radius: 6px;
+  border: none;
+}
+
+.subscribe-box button {
+  padding: 10px 20px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 6px;
+  background: black;
+  color: white;
+  cursor: pointer;
+}

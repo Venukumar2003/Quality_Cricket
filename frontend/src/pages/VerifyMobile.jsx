@@ -38,6 +38,7 @@ import React, { useRef, useState } from "react";
 import "./Auth.css";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
+import loginBg from "../assets/login.svg";
 
 const VerifyMobile = () => {
 
@@ -68,7 +69,10 @@ const VerifyMobile = () => {
   };
 
   return (
-    <div className="auth-page">
+    <div className="auth-page"
+    style={{
+        backgroundImage: `url(${loginBg})`,
+      }}>
       <Navbar />
 
       <div className="overlay">

@@ -39,7 +39,7 @@
 
 import React, { useEffect, useState } from "react";
 import { getProducts } from "../services/productService";
-
+import Navbar from "../components/Navbar";
 import Banner from "../components/Banner";
 import TopSellers from "../components/TopSellers";
 import FeaturedProducts from "../components/FeaturedProducts";
@@ -52,12 +52,13 @@ const Home = () => {
 
   useEffect(() => {
     getProducts()
-      .then(res => setProducts(res.data))
+      .then(res => setProducts(data))
       .catch(err => console.log(err));
   }, []);
 
   return (
     <>
+    <Navbar/>
       <Banner />
       <TopSellers products={products} />
       <FeaturedProducts products={products} />
