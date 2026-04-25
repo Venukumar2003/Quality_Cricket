@@ -169,6 +169,7 @@
 
 
 import React, { useState } from "react";
+import axios from "axios"
 // import "./Auth.css";
 import "./Login.css"
 import { useNavigate } from "react-router-dom";
@@ -182,7 +183,7 @@ const Login = () => {
   const [phone, setPhone] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (!email || !password) {
       alert("please fill the fields");
       return;
@@ -192,7 +193,27 @@ const Login = () => {
       return;
     }
 
-    navigate("/home");
+
+
+    try {
+      const res = await axios.post("http://localhost:5000/api/auth/login", {
+        email,
+        password
+      });
+
+      if (res.data.success) {
+      navigate("/home");
+    } else {
+      alert(res.data.message);
+    }
+
+    } catch (error) {
+      console.log(error)
+    }
+
+    
+
+    // navigate("/home");
   };
 
   return (
@@ -263,7 +284,13 @@ const Login = () => {
 
               <button
                 className="main-btn"
-                onClick={() => navigate("/verify-mobile")}
+                onClick={async () => {
+                  await axios.post("http://localhost:5000/api/auth/send-otp-mobile", {
+                    mobile: phone
+                  });
+
+                  navigate("/verify-mobile", { state: { mobile: phone } });
+                }}
               >
                 Send OTP
               </button>

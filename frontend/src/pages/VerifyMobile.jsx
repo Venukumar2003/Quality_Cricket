@@ -36,13 +36,20 @@
 
 import React, { useRef, useState } from "react";
 import "./Auth.css";
+import axios from "axios";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import loginBg from "../assets/login.svg";
 
+import { useLocation } from "react-router-dom";
+
 const VerifyMobile = () => {
 
-    const navigate = useNavigate();
+  const { state } = useLocation();
+  const mobile = state?.mobile;
+
+
+  const navigate = useNavigate();
 
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const inputsRef = useRef([]);
@@ -68,9 +75,33 @@ const VerifyMobile = () => {
     }
   };
 
+
+  const handleLogin = async () => {
+    try {
+      const finalOtp = otp.join("");
+      const res = await axios.post(
+        "http://localhost:5000/api/auth/verify-otp-mobile",
+        {
+          mobile: mobile, // reuse same field
+          otp: finalOtp
+        }
+      );
+
+      if (res.data.success) {
+        navigate("/home");
+      } else {
+        alert("Invalid OTP");
+      }
+
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div className="auth-page"
-    style={{
+      style={{
         backgroundImage: `url(${loginBg})`,
       }}>
       <Navbar />
@@ -97,7 +128,7 @@ const VerifyMobile = () => {
             ))}
           </div>
 
-          <button className="main-btn" onClick={()=>navigate("/home")}>Verify</button>
+          <button className="main-btn" onClick={handleLogin}>Verify</button>
 
         </div>
       </div>

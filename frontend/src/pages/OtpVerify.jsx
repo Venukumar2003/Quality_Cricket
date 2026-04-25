@@ -36,12 +36,21 @@
 
 import React, { useRef, useState } from "react";
 import "./Auth.css";
+import axios from "axios";
 import Navbar from "../components/Navbar";
 import Home from "./Home";
 import { useNavigate } from "react-router-dom";
 import loginBg from "../assets/login.svg";
 
+import { useLocation } from "react-router-dom";
+
+
+
 const OtpVerify = () => {
+
+
+  const {state} = useLocation();
+  const email = state ?.email;
 
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const inputsRef = useRef([]);
@@ -68,9 +77,31 @@ const OtpVerify = () => {
     }
   };
 
+  const handleLogin = async () => {
+    try {
+      const finalOtp = otp.join("");
+
+      const res =  await axios.post("http://localhost:5000/api/auth/verify-otp", {
+        email,
+        otp: finalOtp
+      });
+
+       if (res.data.success) {
+      alert("Verify OTP Successfully");
+      navigate("/reset-password", {state : {email}});
+    }else{
+      aler("Invalid OTP")
+    }
+
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div className="auth-page"
-    style={{
+      style={{
         backgroundImage: `url(${loginBg})`,
       }}>
       <Navbar />
@@ -97,7 +128,7 @@ const OtpVerify = () => {
             ))}
           </div>
 
-          <button className="main-btn" type="submit" onClick={()=>navigate("/reset-password")}>Verify</button>
+          <button className="main-btn" type="submit" onClick={handleLogin}>Verify</button>
 
         </div>
       </div>
