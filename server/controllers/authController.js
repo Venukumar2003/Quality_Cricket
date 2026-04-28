@@ -6,10 +6,21 @@ const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "YOUR_EMAIL@gmail.com",
-    pass: "YOUR_APP_PASSWORD"
+    user: "venuvk8368@gmail.com",
+    pass: "zkcz npdr jhiw gecx"
   }
+
+  // auth: {
+//   user: "YOUR_EMAIL@gmail.com",
+//   pass: "YOUR_REAL_APP_PASSWORD" // 👈 real app password
+// }
 });
+
+
+// auth: {
+//   user: "venuvk8368@gmail.com",
+//   pass: "abcd efgh ijkl mnop" // 👈 real app password
+// }
 
 // ✅ REGISTER
 // exports.register = async (req, res) => {
@@ -95,28 +106,49 @@ exports.login = (req, res) => {
 };
 
 // ✅ SEND OTP
-exports.sendOtp = (req, res) => {
-  const { email } = req.body;
+exports.sendOtp = async (req, res) => {
+  try {
+    const { email } = req.body;
 
-   console.log("API HIT /send-otp");   // check if API is called
+    console.log("API HIT /send-otp");
 
-  const otp = Math.floor(100000 + Math.random() * 900000).toString();
-console.log("Generated OTP:", otp); 
-  const expiry = new Date(Date.now() + 5 * 60 * 1000);
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    console.log("Generated OTP:", otp);
 
-  db.query(
-    "INSERT INTO otp_codes (email, otp, expires_at) VALUES (?,?,?)",
-    [email, otp, expiry]
-  );
+    const expiry = new Date(Date.now() + 5 * 60 * 1000);
 
-  transporter.sendMail({
-    from: "YOUR_EMAIL@gmail.com",
-    to: email,
-    subject: "OTP Verification",
-    text: `Your OTP is ${otp}`
-  });
+    // ✅ DB insert with error handling
+    db.query(
+      "INSERT INTO otp_codes (email, otp, expires_at) VALUES (?,?,?)",
+      [email, otp, expiry],
+      async (dbErr) => {
+        if (dbErr) {
+          console.log("DB Error:", dbErr);
+          return res.json({ success: false, message: "DB error" });
+        }
 
-  res.json({ success: true });
+        // ✅ Send mail
+        transporter.sendMail({
+          from: "venuvk8368@gmail.com",
+          to: email,
+          subject: "OTP Verification",
+          text: `Your OTP is ${otp}`
+        }, (mailErr, info) => {
+          if (mailErr) {
+            console.log("Mail Error:", mailErr);
+            return res.json({ success: false, message: "Email failed" });
+          }
+
+          console.log("Email sent:", info.response);
+          return res.json({ success: true });
+        });
+      }
+    );
+
+  } catch (err) {
+    console.log("Server Crash Error:", err);
+    return res.status(500).json({ success: false, message: "Server error" });
+  }
 };
 
 // ✅ VERIFY OTP
